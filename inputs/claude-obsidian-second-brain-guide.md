@@ -1,6 +1,7 @@
 # How to Build an AI Second Brain With Claude and Obsidian That Gets Smarter Every Day
 
 > 原文：Full Guide — 用 Claude + Obsidian 搭建会自我进化的第二大脑
+> 作者：Yarchi（X）
 
 ---
 

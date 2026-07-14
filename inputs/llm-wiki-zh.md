@@ -1,5 +1,7 @@
 # LLM Wiki
 
+> 作者：Andrej Karpathy · LLM Wiki（2026.04）· 中译
+
 一种用 LLM 构建个人知识库的模式。
 
 这是一个理念文件，设计为直接复制粘贴到你自己的 LLM Agent（如 OpenAI Codex、Claude Code、OpenCode/Pi 等）中使用。它的目标是传达核心思想，具体细节则由你的 Agent 与你协作构建。
