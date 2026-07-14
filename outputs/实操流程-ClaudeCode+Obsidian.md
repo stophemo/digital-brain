@@ -47,7 +47,7 @@ cp /path/to/CLAUDE-schema.md "$BRAIN/CLAUDE.md"
 
 这是唯一需要手动放进去的文件。CLAUDE.md 就是 Digital Brain 的种子——它定义了整个 wiki 的结构、规则和工作流。剩下的交给 Claude。
 
-> **首次自定义**：打开 `$BRAIN/CLAUDE.md`，把 §5 标签表里的「领域」一行换成你自己的实际领域（工作、专业、兴趣）。其余先用默认。
+> **首次自定义**：打开 `$BRAIN/CLAUDE.md`，把 §5 标签表里的「领域」一行换成你自己的实际领域（工作、专业、兴趣）。其余先用默认（完整定制点清单见仓库 `README.md`）。
 
 ---
 

@@ -3,9 +3,10 @@
 > **理论基础**：Andrej Karpathy《LLM Wiki》(2026.04) + Claude+Obsidian Second Brain Guide
 > **执行环境**：macOS · Claude Code · Obsidian
 > **存储位置**：由你选择——本地磁盘 或 iCloud/私有云（取舍见 §六·存储位置）
-> **文档版本**：v2.2 · 2026-07-14（对齐 Schema v1.3）
+> **文档版本**：v2.3 · 2026-07-14（对齐 Schema v1.4）
 >
 > ⚠️ **本文档是完整方案（给人看）——讲"为什么"和"怎么落地"。** 唯一权威的执行规则是 Schema，见同目录 `CLAUDE-schema.md`（部署为 vault 根 CLAUDE.md）。本文档只引用 Schema、不复制它，避免两份漂移。
+> 📖 **仓库入口 `README.md`**（快速上手 + 定制点清单）；`实操流程-ClaudeCode+Obsidian.md` 为 15 分钟 Quickstart。
 
 ---
 
@@ -309,4 +310,4 @@ Schema 只描述"要达到什么效果"，不绑定具体工具；换 Agent 时�
 
 ---
 
-*文档版本 v2.2 · 2026-07-14 · 基于 llm-wiki (Karpathy) + Claude+Obsidian Second Brain Guide*
+*文档版本 v2.3 · 2026-07-14 · 基于 llm-wiki (Karpathy) + Claude+Obsidian Second Brain Guide*
