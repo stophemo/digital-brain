@@ -5,15 +5,6 @@
 
 ---
 
-## 🔧 采用者定制点（开源模板 → 你的实例）
-
-本 Schema 通用规则照用，仅以下几处按你的领域替换（正文标 🔧），其余无需改动：
-- **§2 目录树**：示例结构，`raw/` 子目录（`wechat/`、`personal/`、`company/`…）按你的数据源与领域增删
-- **§5 领域标签**：「领域」行占位，换成你的工作/专业/兴趣领域
-- **§6 录入表 · §7 聚合源约定**：标 🔧 的数据源适配片段（如微信），不用即删
-
----
-
 ## 1. 角色 & 权限
 
 你是这个 vault 的 **wiki 维护者**。你的工作不是聊天，是维护一个持久化、持续演化的知识库。
@@ -37,8 +28,6 @@
 
 ## 2. 目录结构
 
-> 🔧 以下为**示例结构**（含可选数据源）。照抄后按你的领域增删——`raw/` 子目录不是硬性规定。
-
 ```
 vault/
 ├── CLAUDE.md              ← 本文件（Schema 宪法）
@@ -46,7 +35,7 @@ vault/
 ├── index.md               ← 内容目录（LLM 维护）
 ├── log.md                 ← 操作日志（LLM 追加）
 ├── raw/                   ← 不可变原始资料（只读·事实来源）
-│   ├── wechat/            ← 🔧 微信数据（可选数据源示例）
+│   ├── wechat/            ← 微信数据
 │   │   ├── data/           ← 聊天记录（{联系人}/{YYYY-MM}.md）
 │   │   ├── feature/        ← 特征聚合（人物关系、话题趋势等）
 │   │   └── reports/        ← 分析报告（{YYYY-MM}/）
@@ -158,12 +147,12 @@ sha256: <hex>                                   # 对本文件正文（frontmatt
 | 组织 | `company` `team` `department` |
 | 技术 | `architecture` `algorithm` `system-design` `debugging` |
 | 工具 | `tool` `workflow` `automation` |
-| 🔧 领域 | 按你自己的工作/专业/兴趣定义（占位示例：`领域A` `领域B`） |
+| 领域 | 按你自己的工作/专业/兴趣定义（占位示例：`领域A` `领域B`） |
 | 项目 | `project-active` `project-archive` |
 | 方法论 | `methodology` `best-practice` `lesson-learned` |
 | 元信息 | `meta` `index` `comparison` `timeline` |
 
-> **领域标签因人而异**——初次使用时用你自己的实际领域（工作、专业、兴趣）替换「领域」这一行。其余标签为通用建议，可按需增删。
+> 领域标签按你的实际领域（工作、专业、兴趣）定义；其余为通用建议，可按需增删。
 
 ---
 
@@ -183,7 +172,7 @@ sha256: <hex>                                   # 对本文件正文（frontmatt
 | `.pdf` | 提取文本 + 表格结构，保留阅读顺序 | marker-pdf、pymupdf、OCR |
 | `.html`（网页） | 提取正文内容为 Markdown，下载图片到本地 | pandoc、Obsidian Web Clipper |
 | `.html`（书签） | 解析书签树（文件夹层级 + URL + 标题），生成结构化摘要 | 书签树解析脚本（如 Python HTMLParser） |
-| 🔧 `.txt`（微信导出·示例适配器） | 清洗格式，保留时间戳和发言者信息 | 直接处理 |
+| `.txt`（微信导出） | 清洗格式，保留时间戳和发言者信息 | 直接处理 |
 | `.md` `.txt`（普通） | 直接作为可读资料 | 无需转换 |
 | 音频 | 转录为文本，保留时间戳 | mlx-whisper、openai-whisper |
 | 视频 | 提取音频转录 + 关键帧截图 | ffmpeg + whisper |
@@ -257,7 +246,7 @@ sha256: <hex>                                   # 对本文件正文（frontmatt
 **人物画像（persona）约定**（实战沉淀）：
 - 人物页放 `wiki/entities/persona/`——它与系统/组织/项目在数据源和更新模式上本质不同。
 - 两档创建阈值：数据密度足够（多份来源的核心主题）才建页；不足先等，不硬造低质画像。
-- **聚合型数据源**（群聊、论坛、邮件列表、合集）是数据源、不是实体——从中提取信号路由到 persona/project/concept 页面，不为容器本身建页（🔧 如微信群）。
+- **聚合型数据源**（群聊、论坛、邮件列表、合集）是数据源、不是实体——从中提取信号路由到 persona/project/concept 页面，不为容器本身建页（如微信群）。
 - 你自己的 persona 从项目上下文即可合成，不需要聊天数据。
 
 ```
@@ -535,5 +524,4 @@ wiki 里为每个项目保留一张"索引卡"（`type: entity` / `entity-type: 
 
 ---
 
-*本文件基于 Andrej Karpathy llm-wiki 理论 + Obsidian Second Brain Guide（IPOF 工作区层为后者所加，非 llm-wiki 原典）*
 *Schema 版本 v1.4 · 2026-07-14*
