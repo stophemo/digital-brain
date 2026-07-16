@@ -1,0 +1,4 @@
+interface:
+  display_name: "Digital Brain Setup"
+  short_description: "搭建可验证、可追溯且由 LLM 持续维护的本地知识库"
+  default_prompt: "使用 $digital-brain-setup 为我搭建并定制一个本地 Digital Brain。"
