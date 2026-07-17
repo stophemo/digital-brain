@@ -1,6 +1,0 @@
-.DS_Store
-.obsidian/
-.staging/
-.digital-brain/local.yml
-__pycache__/
-*.py[cod]

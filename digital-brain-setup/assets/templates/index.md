@@ -1,24 +1,16 @@
----
-title: Digital Brain Index
-type: meta
-updated: "{{DATE}}"
-total_pages: 0
----
-
 # Digital Brain Index
 
-## Entities
+> 最近更新：{{DATE}}
 
-## Concepts
+这里是知识导航。每当创建或显著更新 wiki 页面时，在合适分区加入一个相对链接和
+一句话说明。
 
-## Comparisons
+## 正在关注
 
-## Syntheses
+## 主题与概念
 
-## Queries
+## 项目与实践
 
-## Drafts
+## 人物与组织
 
-## Meta
-
-## Archive
+## 对比与综合
