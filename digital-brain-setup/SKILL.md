@@ -1,6 +1,6 @@
 ---
 name: digital-brain-setup
-description: 快速搭建并教会用户使用本地 Digital Brain 知识库。用户要求创建数字大脑、第二大脑、个人 wiki、知识 vault，或希望用 Codex、Claude Code、Gemini 等 Agent 管理长期知识时使用；负责创建简单的 inbox、raw、wiki 和 index 结构，安装 Agent 规则，通过简短访谈生成个人画像，并带用户完成第一次知识摄入。
+description: 新建、初始化或首次配置本地 Digital Brain 知识库，并教会用户开始使用。用户要求从零创建数字大脑、第二大脑、个人 wiki 或知识 vault 时使用；负责创建简单的 inbox、raw、wiki 和 index 结构，安装 Agent 规则，通过简短访谈生成个人画像，并邀请用户完成第一次知识摄入。不要因查询、整理或维护已有知识库而触发。
 ---
 
 # Digital Brain Setup
@@ -96,11 +96,11 @@ python3 scripts/init_vault.py <vault> --agent other --rule-file <规则文件名
 
 ### 6. 带用户开始
 
-报告 vault 路径和规则文件名，提醒用户先阅读 `START-HERE.md`。然后提供一个立即可用
-的下一步：
+报告 vault 路径和规则文件名，提醒用户先阅读 `START-HERE.md`。如果用户尚未提供第一
+份资料，只问：
 
-> 把一份资料路径或网址发给我，我会先放入 raw，再与你确认重点，整理进 wiki 并更新
-> index。
+> 现在要提供第一份资料，完成一次 `raw → wiki → index`，还是稍后再开始？
 
-如果用户已经提供了第一份资料，先说明将进行的复制和整理动作，再按 vault 规则完成
-第一次 `raw → wiki`，让用户看到完整闭环。
+用户选择稍后开始时，给出一个可复制的摄入提示词后结束搭建。用户已经提供资料或选择
+现在开始时，获取一份资料路径或网址，先说明将进行的复制和整理动作，再按 vault 规则
+完成第一次 `raw → wiki → index`，让用户看到完整闭环。

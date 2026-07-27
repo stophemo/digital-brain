@@ -41,11 +41,11 @@ def parse_args() -> argparse.Namespace:
 def default_skills_dir(platform: str) -> Path:
     if platform == "codex":
         config_root = Path(
-            os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))
+            os.environ.get("CODEX_HOME") or str(Path.home() / ".codex")
         )
     else:
         config_root = Path(
-            os.environ.get("CLAUDE_CONFIG_DIR", str(Path.home() / ".claude"))
+            os.environ.get("CLAUDE_CONFIG_DIR") or str(Path.home() / ".claude")
         )
     return config_root.expanduser() / "skills"
 

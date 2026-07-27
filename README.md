@@ -9,12 +9,13 @@ Agent 帮你收集资料、整理知识、建立关联并持续复盘。你不�
 ## 一句话安装并搭建
 
 准备 Git、Python 3.9+，以及 Codex 或 Claude Code。选择你使用的 Agent，把对应的
-整段提示词复制进去即可；Agent 会自行下载、检查、安装，然后直接开始逐题访谈。
+整段提示词复制进去即可；Agent 会自行查找最新正式 Release、检查、安装，然后直接
+开始逐题访谈。若仓库还没有正式 Release，Agent 应停止并说明情况，不会改用 `main`。
 
 ### Codex
 
 ```text
-请将 https://github.com/stophemo/digital-brain 克隆到临时目录，完整阅读仓库中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py codex；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该 tag 的源码下载或克隆到临时目录，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py codex；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
 完整说明见 [Codex 教程](guides/codex.md)。
@@ -22,7 +23,7 @@ Agent 帮你收集资料、整理知识、建立关联并持续复盘。你不�
 ### Claude Code
 
 ```text
-请将 https://github.com/stophemo/digital-brain 克隆到临时目录，完整阅读仓库中的 guides/claude-code.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该 tag 的源码下载或克隆到临时目录，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/claude-code.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
 完整说明见 [Claude Code 教程](guides/claude-code.md)。
@@ -51,8 +52,9 @@ digital-brain/
 ## 第一次搭建
 
 Setup Agent 会用几个简短问题了解你的使用目标、关注领域和偏好，把访谈结果写入
-`profile.md`，然后创建知识库和对应的 Agent 规则。完成后，进入新目录重新启动你
-选择的 Agent：
+`profile.md`，然后创建知识库和对应的 Agent 规则。搭建结束前，它会询问你是现在
+提供第一份资料、完成一次 `raw → wiki → index`，还是明确选择稍后开始。完成后，
+进入新目录重新启动你选择的 Agent：
 
 ```bash
 cd ~/digital-brain
@@ -157,6 +159,8 @@ python3 /path/to/skill-creator/scripts/quick_validate.py digital-brain-setup
 ```
 
 项目脚本仅使用 Python 标准库。`quick_validate.py` 来自 Codex 的 `skill-creator`。
+GitHub Actions 会在 Ubuntu、macOS 和 Windows 上使用 Python 3.9 与 3.14 运行行为测试
+和编译检查。
 
 ## License
 

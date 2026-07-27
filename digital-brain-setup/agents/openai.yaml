@@ -1,4 +1,4 @@
 interface:
   display_name: "Digital Brain Setup"
-  short_description: "几分钟搭建并学会使用本地数字大脑，持续积累和连接知识"
-  default_prompt: "使用 $digital-brain-setup 为我搭建一个简单的本地 Digital Brain，并教我完成第一次知识整理。"
+  short_description: "几分钟从零搭建本地数字大脑，并带你完成第一次知识整理"
+  default_prompt: "使用 $digital-brain-setup 从零搭建一个简单的本地 Digital Brain，并邀请我完成第一次知识整理。"

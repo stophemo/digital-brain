@@ -48,12 +48,23 @@ class DigitalBrainSetupTests(unittest.TestCase):
         )
 
     def assert_initialized(self, vault: Path, rule_file: str) -> None:
+        expected_names = {
+            rule_file,
+            "START-HERE.md",
+            "profile.md",
+            "index.md",
+            "inbox",
+            "raw",
+            "wiki",
+        }
+        self.assertEqual({path.name for path in vault.iterdir()}, expected_names)
         self.assertTrue((vault / rule_file).is_file())
         self.assertTrue((vault / "START-HERE.md").is_file())
         self.assertTrue((vault / "profile.md").is_file())
         self.assertTrue((vault / "index.md").is_file())
         for directory in ("inbox", "raw", "wiki"):
             self.assertTrue((vault / directory).is_dir())
+            self.assertEqual(list((vault / directory).iterdir()), [])
 
     def test_initializes_small_codex_vault_without_runtime_state(self) -> None:
         vault = self.temp_root / "codex-vault"
@@ -196,6 +207,13 @@ class DigitalBrainSetupTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assert_initialized(vault, "CLAUDE.md")
         self.assertFalse((vault / ".digital-brain").exists())
+
+    def test_skill_trigger_and_first_ingestion_contract(self) -> None:
+        skill_text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("不要因查询、整理或维护已有知识库而触发", skill_text)
+        self.assertIn("现在要提供第一份资料", skill_text)
+        self.assertIn("还是稍后再开始", skill_text)
 
 
 if __name__ == "__main__":

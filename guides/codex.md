@@ -5,10 +5,11 @@
 把下面整句话复制给 Codex：
 
 ```text
-请将 https://github.com/stophemo/digital-brain 克隆到临时目录，完整阅读仓库中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 `python3 scripts/install_skill.py codex`；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该 tag 的源码下载或克隆到临时目录，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 `python3 scripts/install_skill.py codex`；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
-Codex 会完成下载、检查、安装和首次搭建。访谈时一次只回答一个问题即可。
+Codex 会完成正式版本的下载、检查、安装和首次搭建。访谈时一次只回答一个问题即可。
+仓库没有正式 Release 时应停止，不得回退到可变的 `main`。
 
 ## 安装到哪里
 
@@ -25,7 +26,7 @@ ${CODEX_HOME:-$HOME/.codex}/skills/digital-brain-setup
 
 Codex 通常会请求两类权限：
 
-- 联网访问 GitHub，用于克隆此仓库；
+- 联网访问 GitHub，用于获取正式 Release；
 - 写入 Codex 的 Skill 目录，该目录通常位于当前项目之外。
 
 确认请求中的来源是本仓库、目标是上述 Skill 目录后再批准。如果目标目录已有不同
@@ -34,8 +35,8 @@ Codex 通常会请求两类权限：
 ## 首次搭建
 
 安装完成后，Codex 应在同一会话中完整读取已安装的 `SKILL.md`，然后逐题了解你的
-目标、资料类型和 vault 保存位置。访谈结束后，它会创建轻量结构，并带你完成第一
-次 `inbox → raw → wiki → index` 整理。
+目标、资料类型和 vault 保存位置。访谈结束后，它会创建轻量结构，并询问你是现在
+提供第一份资料、完成一次 `raw → wiki → index`，还是稍后再开始。
 
 如果 Codex 安装后停下了，继续发送：
 
@@ -68,11 +69,11 @@ Codex 通常会请求两类权限：
 
 ## 手动安装兜底
 
-如果一句话安装未完成，可在终端运行：
+如果一句话安装未完成，打开 [GitHub Releases](https://github.com/stophemo/digital-brain/releases/latest)，
+确认页面显示的是正式版本，然后下载页面中的 Source code 并解压。不要从 `main`
+下载源码。进入解压后的仓库根目录，再运行：
 
 ```bash
-git clone https://github.com/stophemo/digital-brain.git
-cd digital-brain
 python3 scripts/install_skill.py codex
 ```
 

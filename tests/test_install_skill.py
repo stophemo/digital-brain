@@ -11,13 +11,24 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "digital-brain-setup"
 INSTALLER = ROOT / "scripts/install_skill.py"
+IGNORED_PACKAGE_NAMES = {".DS_Store", "__pycache__"}
 
 
-def snapshot_tree(root: Path) -> dict[str, tuple[str, bytes | str | None]]:
+def snapshot_tree(
+    root: Path,
+    *,
+    ignore_package_artifacts: bool = False,
+) -> dict[str, tuple[str, bytes | str | None]]:
     """记录目录树类型和内容，用于验证发布包被完整复制。"""
     snapshot: dict[str, tuple[str, bytes | str | None]] = {}
     for path in root.rglob("*"):
-        relative = path.relative_to(root).as_posix()
+        relative_path = path.relative_to(root)
+        if ignore_package_artifacts and (
+            any(part in IGNORED_PACKAGE_NAMES for part in relative_path.parts)
+            or path.suffix == ".pyc"
+        ):
+            continue
+        relative = relative_path.as_posix()
         if path.is_symlink():
             snapshot[relative] = ("symlink", os.readlink(path))
         elif path.is_dir():
@@ -66,7 +77,10 @@ class InstallSkillTests(unittest.TestCase):
 
     def assert_complete_skill_copy(self, installed_skill: Path) -> None:
         self.assertTrue(installed_skill.is_dir())
-        self.assertEqual(snapshot_tree(installed_skill), snapshot_tree(SKILL))
+        self.assertEqual(
+            snapshot_tree(installed_skill),
+            snapshot_tree(SKILL, ignore_package_artifacts=True),
+        )
 
     def test_codex_uses_home_default_and_copies_complete_skill(self) -> None:
         result = self.run_installer("codex")
@@ -104,6 +118,23 @@ class InstallSkillTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assert_complete_skill_copy(
                     config_directory / "skills/digital-brain-setup"
+                )
+
+    def test_empty_configuration_directory_uses_home_default(self) -> None:
+        cases = (
+            ("codex", "CODEX_HOME", self.home / ".codex"),
+            ("claude", "CLAUDE_CONFIG_DIR", self.home / ".claude"),
+        )
+        for client, variable, default_root in cases:
+            with self.subTest(client=client):
+                env = self.base_env.copy()
+                env[variable] = ""
+
+                result = self.run_installer(client, env=env)
+
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assert_complete_skill_copy(
+                    default_root / "skills/digital-brain-setup"
                 )
 
     def test_skills_dir_overrides_client_default(self) -> None:
@@ -220,6 +251,7 @@ class InstallSkillTests(unittest.TestCase):
 
     def test_readme_and_platform_guides_offer_one_prompt_installation(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        release_url = "https://github.com/stophemo/digital-brain/releases"
         cases = (
             ("codex", ROOT / "guides/codex.md"),
             ("claude", ROOT / "guides/claude-code.md"),
@@ -231,7 +263,14 @@ class InstallSkillTests(unittest.TestCase):
                 self.assertIn(command, readme)
                 self.assertIn(command, guide)
                 self.assertIn(
-                    "https://github.com/stophemo/digital-brain",
+                    release_url,
+                    guide,
+                )
+                self.assertIn(release_url, readme)
+                self.assertIn("不要改用 main", readme)
+                self.assertIn("不要改用 main", guide)
+                self.assertNotIn(
+                    "git clone https://github.com/stophemo/digital-brain.git",
                     guide,
                 )
                 self.assertIn("digital-brain-setup/SKILL.md", guide)
