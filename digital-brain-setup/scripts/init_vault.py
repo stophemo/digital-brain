@@ -31,6 +31,12 @@ class InitError(RuntimeError):
     """表示初始化前置条件不满足。"""
 
 
+def configure_output_encoding() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="在空目录中初始化 Digital Brain，不覆盖任何现有文件。"
@@ -140,6 +146,7 @@ def install_atomically(target: Path, rule_file: str, target_existed: bool) -> No
 
 
 def main() -> int:
+    configure_output_encoding()
     args = parse_args()
     try:
         verify_assets()

@@ -21,6 +21,12 @@ class InstallError(RuntimeError):
     """表示 Skill 无法安全安装。"""
 
 
+def configure_output_encoding() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="安装 Digital Brain Setup Skill；不覆盖已有的不同版本。"
@@ -134,6 +140,7 @@ def install(skills_dir: Path) -> tuple[Path, bool]:
 
 
 def main() -> int:
+    configure_output_encoding()
     args = parse_args()
     try:
         verify_source()

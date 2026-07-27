@@ -52,6 +52,7 @@ class InstallSkillTests(unittest.TestCase):
 
         self.base_env = os.environ.copy()
         self.base_env["HOME"] = str(self.home)
+        self.base_env["PYTHONIOENCODING"] = "cp1252"
         self.base_env.pop("CODEX_HOME", None)
         self.base_env.pop("CLAUDE_CONFIG_DIR", None)
 
@@ -71,6 +72,7 @@ class InstallSkillTests(unittest.TestCase):
             check=False,
             capture_output=True,
             text=True,
+            encoding="utf-8",
             cwd=self.temp_root,
             env=env or self.base_env,
         )

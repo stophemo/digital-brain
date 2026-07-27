@@ -39,12 +39,16 @@ class DigitalBrainSetupTests(unittest.TestCase):
         *args: object,
         script: Path = INIT,
     ) -> subprocess.CompletedProcess[str]:
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "cp1252"
         return subprocess.run(
             [sys.executable, str(script), str(target), *(str(arg) for arg in args)],
             check=False,
             capture_output=True,
             text=True,
+            encoding="utf-8",
             cwd=self.temp_root,
+            env=env,
         )
 
     def assert_initialized(self, vault: Path, rule_file: str) -> None:
