@@ -3,14 +3,14 @@
 在 Claude Code 中复制下面这一句话即可：
 
 ```text
-请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该仓库克隆到临时目录，检出该 tag，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/claude-code.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请把 https://github.com/stophemo/digital-brain.git 的最新 main 分支克隆到临时目录，记录检出的 commit SHA，并确认 HEAD 与 origin/main 指向同一 commit；完整阅读该 commit 中的 guides/claude-code.md，检查仓库内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
 ## 会发生什么
 
 Claude Code 会：
 
-1. 请求联网权限，从 GitHub 下载最新正式 Release 到临时目录；没有正式版本时停止。
+1. 请求联网权限，把 GitHub 上的最新 `main` 克隆到临时目录并记录 commit SHA。
 2. 检查安装内容，再把 Skill 安装到 Claude Code 的 skills 目录。
 3. 若发现不同版本，停下来征求你的确认，不会直接覆盖。
 4. 完整读取安装后的 `SKILL.md`，一次只问一个问题。
@@ -51,9 +51,16 @@ claude
 
 ## 手动安装兜底
 
-自动安装不可用时，打开 [GitHub Releases](https://github.com/stophemo/digital-brain/releases/latest)，
-确认页面显示的是正式版本，然后下载页面中的 Source code 并解压。不要从 `main`
-下载源码。进入解压后的仓库根目录，检查安装脚本后执行：
+自动安装不可用时，先进入一个用于存放临时文件的空目录，再运行：
+
+```bash
+git clone --branch main --single-branch https://github.com/stophemo/digital-brain.git
+cd digital-brain
+git rev-parse HEAD
+git rev-parse origin/main
+```
+
+确认最后两行输出一致，记录该 commit SHA，并检查安装脚本后再运行：
 
 ```bash
 python3 scripts/install_skill.py claude

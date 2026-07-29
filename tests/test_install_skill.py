@@ -19,7 +19,7 @@ def snapshot_tree(
     *,
     ignore_package_artifacts: bool = False,
 ) -> dict[str, tuple[str, bytes | str | None]]:
-    """记录目录树类型和内容，用于验证发布包被完整复制。"""
+    """记录目录树类型和内容，用于验证 Skill 被完整复制。"""
     snapshot: dict[str, tuple[str, bytes | str | None]] = {}
     for path in root.rglob("*"):
         relative_path = path.relative_to(root)
@@ -254,6 +254,7 @@ class InstallSkillTests(unittest.TestCase):
 
     def test_readme_and_platform_guides_offer_one_prompt_installation(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        repository_url = "https://github.com/stophemo/digital-brain.git"
         release_url = "https://github.com/stophemo/digital-brain/releases"
         cases = (
             ("codex", ROOT / "guides/codex.md"),
@@ -262,25 +263,30 @@ class InstallSkillTests(unittest.TestCase):
         for platform, guide_path in cases:
             with self.subTest(platform=platform):
                 guide = guide_path.read_text(encoding="utf-8")
+                manual_install = guide.split("## 手动安装兜底", maxsplit=1)[1]
                 command = f"python3 scripts/install_skill.py {platform}"
                 self.assertIn(command, readme)
                 self.assertIn(command, guide)
-                self.assertIn(
-                    release_url,
-                    guide,
-                )
-                self.assertIn(release_url, readme)
-                self.assertIn("不要改用 main", readme)
-                self.assertIn("不要改用 main", guide)
-                self.assertIn("把该仓库克隆到临时目录", readme)
-                self.assertIn("把该仓库克隆到临时目录", guide)
-                self.assertIn("检出该 tag", readme)
-                self.assertIn("检出该 tag", guide)
-                self.assertNotIn("下载或克隆到临时目录", readme)
-                self.assertNotIn("下载或克隆到临时目录", guide)
-                self.assertNotIn(
-                    "git clone https://github.com/stophemo/digital-brain.git",
-                    guide,
+                self.assertIn(repository_url, readme)
+                self.assertIn(repository_url, guide)
+                self.assertIn("最新 main 分支", readme)
+                self.assertIn("最新 main 分支", guide)
+                self.assertIn("commit SHA", readme)
+                self.assertIn("commit SHA", guide)
+                self.assertIn("HEAD 与 origin/main 指向同一 commit", readme)
+                self.assertIn("HEAD 与 origin/main 指向同一 commit", guide)
+                self.assertNotIn(release_url, readme)
+                self.assertNotIn(release_url, guide)
+                self.assertNotIn("正式 Release", readme)
+                self.assertNotIn("正式 Release", guide)
+                self.assertNotIn("检出该 tag", readme)
+                self.assertNotIn("检出该 tag", guide)
+                self.assertIn("git rev-parse HEAD", manual_install)
+                self.assertIn("git rev-parse origin/main", manual_install)
+                self.assertIn("确认最后两行输出一致", manual_install)
+                self.assertLess(
+                    manual_install.index("git rev-parse origin/main"),
+                    manual_install.index(command),
                 )
                 self.assertIn("digital-brain-setup/SKILL.md", guide)
                 self.assertIn("逐题访谈", guide)
