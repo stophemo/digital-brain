@@ -272,6 +272,12 @@ class InstallSkillTests(unittest.TestCase):
                 self.assertIn(release_url, readme)
                 self.assertIn("不要改用 main", readme)
                 self.assertIn("不要改用 main", guide)
+                self.assertIn("把该仓库克隆到临时目录", readme)
+                self.assertIn("把该仓库克隆到临时目录", guide)
+                self.assertIn("检出该 tag", readme)
+                self.assertIn("检出该 tag", guide)
+                self.assertNotIn("下载或克隆到临时目录", readme)
+                self.assertNotIn("下载或克隆到临时目录", guide)
                 self.assertNotIn(
                     "git clone https://github.com/stophemo/digital-brain.git",
                     guide,
