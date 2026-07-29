@@ -15,7 +15,7 @@ Agent 帮你收集资料、整理知识、建立关联并持续复盘。你不�
 ### Codex
 
 ```text
-请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该 tag 的源码下载或克隆到临时目录，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py codex；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该仓库克隆到临时目录，检出该 tag，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/codex.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py codex；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Codex 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
 完整说明见 [Codex 教程](guides/codex.md)。
@@ -23,7 +23,7 @@ Agent 帮你收集资料、整理知识、建立关联并持续复盘。你不�
 ### Claude Code
 
 ```text
-请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该 tag 的源码下载或克隆到临时目录，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/claude-code.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
+请从 https://github.com/stophemo/digital-brain/releases 获取最新的非草稿、非预发布正式版本，记录它的 tag，把该仓库克隆到临时目录，检出该 tag，并确认检出的 HEAD 正是该 tag 指向的 commit；如果没有正式 Release，请停止并告诉我，不要改用 main；完整阅读该版本中的 guides/claude-code.md，检查下载内容和安装脚本后，在仓库根目录运行 python3 scripts/install_skill.py claude；如安装位置已有不同版本，请先说明情况并询问我，未经确认不要覆盖；需要联网或写入 Claude 配置目录时请主动申请审批；安装成功后不要结束当前会话，请完整读取已安装的 digital-brain-setup/SKILL.md，严格按其中流程逐题访谈我，并为我搭建可以立即使用的 Digital Brain。
 ```
 
 完整说明见 [Claude Code 教程](guides/claude-code.md)。
